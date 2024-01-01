@@ -24,7 +24,7 @@ private[hpack] class Huffman private (
       .foreach: byte =>
         val (_, binary, len) = table((0xff & byte))
         (len - 1)
-          .to(0, -1)
+          .downTo(0)
           .foreach: i =>
             val j = offset % 8
             if j == 0 then k = offset / 8
@@ -45,7 +45,7 @@ private[hpack] class Huffman private (
     bytes.foreach: byte =>
       var byteHasValue = false
       eosPadding = true
-      7.to(0, -1)
+      7.downTo(0)
         .foreach: i =>
           if byte.bit(i) == 1 then node = node.nn.right
           else
@@ -74,7 +74,7 @@ private[hpack] object Huffman:
     def add(binary: Int, len: Int, value: Byte): Node =
       var node: Node = this
       (len - 1)
-        .to(0, -1)
+        .downTo(0)
         .foreach: i =>
           if binary.bit(i) == 1 then
             if node.right == null then node.right = Node()
@@ -90,8 +90,7 @@ private[hpack] object Huffman:
 
   def apply(table: Array[(Byte, Int, Int)]): Huffman =
     val tree = Node()
-    table.foreach: (value, binary, len) =>
-      tree.add(binary, len, value)
+    for (value, binary, len) <- table do tree.add(binary, len, value)
     new Huffman(tree = tree, table = table)
 
   val INSTANCE = Huffman(

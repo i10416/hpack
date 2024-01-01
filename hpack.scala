@@ -227,6 +227,7 @@ final class Encoder(val table: DynamicTable) extends PrimitiveEncoder:
         table.table.zipWithIndex.collectFirst:
           case ((`name`, `value`), i) =>
             (i + $.STATIC_TABLE_SIZE + 1, value)
+
   private[hpack] def putSpecialHeadersFirst(
       one: (String, String),
       another: (String, String)
