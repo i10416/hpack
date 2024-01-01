@@ -35,6 +35,13 @@ scala-cli fmt
 scala-cli test .
 ```
 
+On JS Platform:
+
+```sh
+scala-cli test . --platform js
+```
+
+
 ### Run Some Tests
 
 ```sh
@@ -54,7 +61,6 @@ To see the docsite in local browser, run the following command.
 ```sh
 cd scala-doc && python3 -m http.server
 ```
-
 
 NOTE: scaladoc options: https://docs.scala-lang.org/scala3/guides/scaladoc/settings.html#overview-of-all-available-settings
 

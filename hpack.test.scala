@@ -1,4 +1,4 @@
-//> using test.dep "org.scalameta::munit:1.0.0-M7"
+//> using test.dep "org.scalameta::munit::1.0.0-M7"
 package http2.hpack
 
 import scala.collection.mutable.ArrayBuffer
