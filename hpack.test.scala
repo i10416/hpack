@@ -39,7 +39,7 @@ class T extends munit.FunSuite:
   test("encode 10 to 5 bits prefix octet") {
     // C.1.1. Example 1: Encoding 10 Using a 5-Bit Prefix
     val octet = Integer.parseInt("10100000", 2).toByte
-    val enc = Encoder(null.asInstanceOf)
+    val enc = Encoder()
     val buf = ArrayBuffer[Byte]()
     enc.encodeInt(10, 5, buf, octet)
     assertEquals(buf, ArrayBuffer(Integer.parseInt("10101010", 2).toByte))
@@ -62,7 +62,7 @@ class T extends munit.FunSuite:
   test("encode 1337 to 5 bits prefix octets") {
     // C.1.2.  Example 2: Encoding 1337 Using a 5-Bit Prefix
     val octet = Integer.parseInt("10100000", 2).toByte
-    val enc = Encoder(null.asInstanceOf)
+    val enc = Encoder()
     val buf = ArrayBuffer[Byte]()
     enc.encodeInt(1337, 5, buf, octet)
     assertEquals(
