@@ -15,7 +15,9 @@ private object syntax:
   final val `0b10000000`: Byte = 128.toByte
   final val `0b00000000`: Byte = 0.toByte
   final val `0b01111111`: Byte = 127.toByte
-  extension (i: Int) def downTo(to: Int) = i.to(to, -1)
+  extension (i: Int)
+    def downTo(to: Int) = i.to(to, -1)
+    def **(n: Int) = Math.pow(i, n)
   extension (bits: Int)
     /** get a bit value at `position` in the bits, assuming `position` is within
       * the bits.

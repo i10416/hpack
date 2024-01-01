@@ -55,7 +55,7 @@ private[hpack] trait PrimitiveDecoder:
   ): Int =
     // extract least n bits from octet(exact 8 bits)
     var int: Int = (current & (0xff >> (8 - n))).toInt
-    val n2 = Math.pow(2, n).toInt - 1
+    val n2 = (2 ** n).toInt - 1
     // If an integer cannot fit in a prefix, all bits in prefix are `1`.
     // Therefore, if int < n2 (= 111...111), there is at least one bit that isn't `1`.
     if int < n2 then return int
@@ -69,7 +69,7 @@ private[hpack] trait PrimitiveDecoder:
       // > The most significant bit of each octet is used as a
       // > continuation flag: its value is set to 1 except for the
       // > last octet in the list.
-      int += (byte & `0b01111111`).toInt * (Math.pow(2, m).toInt)
+      int += (byte & `0b01111111`).toInt * ((2 ** m).toInt)
       if (byte & 128) != 128 then continue = false
       m += 7
     int
@@ -108,7 +108,7 @@ private[hpack] trait PrimitiveEncoder:
       prefix: Byte = `0b00000000`
   ): Unit =
     var integer = int
-    val n2: Int = Math.pow(2, n).toInt - 1
+    val n2: Int = (2 ** n).toInt - 1
     if integer < n2 then // integer fits in the least n bits of the prefix octet
       buf += ((integer | prefix).toByte)
       return
